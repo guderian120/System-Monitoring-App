@@ -1,0 +1,22 @@
+version: 0.0
+os: linux
+files:
+  - source: python_exporter.py
+    destination: /opt/python_exporter/
+hooks:
+  BeforeInstall:
+    - location: scripts/install_dependencies.sh
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: scripts/setup_service.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: scripts/start_service.sh
+      timeout: 300
+      runas: root
+  ApplicationStop:
+    - location: scripts/stop_service.sh
+      timeout: 300
+      runas: root
